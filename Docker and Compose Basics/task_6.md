@@ -14,4 +14,4 @@
 Accessing students must run app.py inside the various python docker containers and provide the output.
 ### <a name="_xc3jy7pm0p98"></a>Learning Outcomes
 1. Understanding Docker image tags and their role in selecting versions.
-1. Familiarity with different releases and their corresponding Docker images.
+1. Familiarity with different releases and their corresponding Docker images .
