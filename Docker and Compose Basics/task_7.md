@@ -33,30 +33,34 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:15
-    container_name: pg-dvd
+    image: postgres:latest
+    container_name: test_postgres
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: dvdrental
-    volumes:
-      - ./dvdrental.tar:/docker-entrypoint-initdb.d/dvdrental.tar
-    networks:
-      - backend
-    # No ports exposed → db is NOT accessible publicly
-
-  adminer:
-    image: adminer
-    container_name: adminer-ui
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
     ports:
-      - 8080:8080  # Adminer UI accessible on host
+      - "5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - internal
+  
+  adminer:
+    image: adminer:latest
+    container_name: adminer_ui
+    ports:
+      - "8080:8080"
     depends_on:
       - db
     networks:
-      - backend
+      - internal
 
+volumes:
+  db_data:
+  
 networks:
-  backend:
+  internal:
     driver: bridge
 ```
 
